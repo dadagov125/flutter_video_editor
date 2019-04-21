@@ -1,9 +1,13 @@
+import 'package:video_editot/store/states/movie_state.dart';
 import 'package:video_editot/store/states/test_state.dart';
 
 class AppState {
   TestState test;
 
-  AppState({this.test});
+  MovieState movieState;
 
-  factory AppState.initialState() => AppState(test: TestState.initialState());
+  AppState({this.test, this.movieState});
+
+  factory AppState.initialState() => AppState(
+      test: TestState.initialState(), movieState: MovieState.initialState());
 }
