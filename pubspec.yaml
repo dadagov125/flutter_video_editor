@@ -24,6 +24,7 @@ dependencies:
   video_player: ^0.10.0+5
   flutter_redux: ^0.5.3
   flutter_ffmpeg: ^0.2.1
+  intl: ^0.15.8
 
 dev_dependencies:
   flutter_test:

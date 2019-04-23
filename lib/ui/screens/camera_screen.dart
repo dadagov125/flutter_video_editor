@@ -90,7 +90,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
     var cameras = await availableCameras();
 
-    controller = CameraController(cameras[1], ResolutionPreset.high);
+    controller = CameraController(cameras[0], ResolutionPreset.high);
 
     controller.initialize().then((_) {
       setState(() {});
@@ -109,7 +109,7 @@ class _CameraScreenState extends State<CameraScreen> {
     var moviesDir = await fileRepo.getMoviesDir();
 
     _moviePath =
-        '${moviesDir.path}/${DateTime.now().microsecondsSinceEpoch.toString()}.mp4';
+        '${moviesDir.path}/${DateTime.now().millisecondsSinceEpoch.toString()}.mp4';
 
     controller.startVideoRecording(_moviePath);
 
@@ -124,7 +124,6 @@ class _CameraScreenState extends State<CameraScreen> {
 
       await fileService.createMovieThumbnail(_moviePath);
 
-      await fileService.getMovieThumbnails();
 
       if (mounted) setState(() {});
 
