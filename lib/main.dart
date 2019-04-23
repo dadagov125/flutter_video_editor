@@ -14,6 +14,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
+
+
+
 void main() => runApp(App());
 
 test() async {
@@ -44,33 +47,33 @@ class App extends StatelessWidget {
       store: store,
       child: MaterialApp(
         title: 'Test App',
-//        routes: {
-//          "home": (context) => HomeScreen(),
-//          "camera": (context) => CameraScreen()
-//        },
-//        initialRoute: "home",
+        routes: {
+          "home": (context) => HomeScreen(),
+          "camera": (context) => CameraScreen()
+        },
+        initialRoute: "home",
 
-        home: Scaffold(
-          body: StoreConnector<AppState, String>(
-            converter: (store)=>store.state.test.text,
-
-            builder: (context, vm)=>Text(vm),
-          ),
-
-          floatingActionButton: StoreConnector<AppState, VoidCallback >(
-            converter: (store)=>()=> store.dispatch(Pre_LoadMoviesAction()),
-
-            builder: (context, callback)=>FloatingActionButton(
-              onPressed: callback,
-                tooltip: 'Increment',
-                child: new Icon(Icons.add)
-            ),
-
-          )
-
-
-
-        )
+//        home: Scaffold(
+//          body: StoreConnector<AppState, String>(
+//            converter: (store)=>store.state.test.text,
+//
+//            builder: (context, vm)=>Text(vm),
+//          ),
+//
+//          floatingActionButton: StoreConnector<AppState, VoidCallback >(
+//            converter: (store)=>()=> store.dispatch(Pre_LoadMoviesAction()),
+//
+//            builder: (context, callback)=>FloatingActionButton(
+//              onPressed: callback,
+//                tooltip: 'Increment',
+//                child: new Icon(Icons.add)
+//            ),
+//
+//          )
+//
+//
+//
+//        )
       ),
     );
   }

@@ -7,16 +7,27 @@ import 'package:path/path.dart' as p;
 
 
 class FileRepository {
-  String _moviesTag = "movies";
+  String _moviesFolder = "movies";
 
   List<String> _moviesExtensions = [".mp4"];
 
   bool isMovie(String path) => _moviesExtensions.contains(p.extension(path));
+  
+  Future<Directory> getMoviesDir() async{
 
-  Future<List<FileSystemEntity>> getMovies() async {
     var dir = await getApplicationDocumentsDirectory();
 
-    var moviesDir = Directory('${dir.path}/${_moviesTag}');
+    var moviesDir = Directory('${dir.path}/${_moviesFolder}');
+
+    if (!await moviesDir.exists()) {
+      await moviesDir.create(recursive: true);
+    }
+    return moviesDir;
+  }
+
+  Future<List<FileSystemEntity>> getMovies() async {
+
+    var moviesDir = await getMoviesDir();
 
     if (!await moviesDir.exists()) {
       await moviesDir.create(recursive: true);
