@@ -12,21 +12,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _widgets = [MovieList()];
-
-  int _selectedIndex = 0;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    StoreProvider.of<AppState>(context).dispatch(Pre_LoadMoviesAction());
+    StoreProvider.of<AppState>(context).dispatch(Pre_LoadMovieThumbnailsAction());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: _widgets[_selectedIndex],
+      body: MovieList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, "camera");

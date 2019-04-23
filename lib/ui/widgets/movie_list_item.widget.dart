@@ -1,23 +1,25 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-class MovieListItem extends StatelessWidget  {
+class MovieListItem extends StatelessWidget {
+  FileSystemEntity movieThumbnail;
 
-  FileSystemEntity movie;
+  VideoPlayerController _controller;
 
-  MovieListItem({@required this.movie});
+  MovieListItem({@required this.movieThumbnail}){
+    _controller = VideoPlayerController.file(File(movieThumbnail.path))
+      ..initialize();
 
-  @override
-  Widget build(BuildContext context) {
-
-    return Text(movie.path);
   }
 
 
-
-
-
-
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: _controller.value.aspectRatio,
+      child: Image(image: FileImage( File(movieThumbnail.path))),
+    );
+  }
 }

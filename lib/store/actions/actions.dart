@@ -13,3 +13,13 @@ class LoadMoviesAction {
 
   LoadMoviesAction(this.movies);
 }
+
+
+class Pre_LoadMovieThumbnailsAction{}
+
+class LoadMovieThumbnailsAction{
+  List<FileSystemEntity> thumbnails;
+
+  LoadMovieThumbnailsAction(this.thumbnails);
+
+}

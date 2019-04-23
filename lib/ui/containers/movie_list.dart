@@ -17,12 +17,12 @@ class MovieList extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return StoreConnector<AppState, List<FileSystemEntity>>(
-      converter: (store)=> store.state.movieState.movies,
+      converter: (store)=> store.state.movieThumbnailsState.thumbnails,
 
       builder: (context, viewModel){
 
         return ListView(
-           children:  viewModel.map((f)=> MovieListItem(movie: f)).toList()
+           children:  viewModel.map((f)=> MovieListItem(movieThumbnail: f)).toList()
 
         );
 

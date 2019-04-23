@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:video_editot/repositories/file_repository.dart';
 import 'package:video_editot/store/actions/actions.dart';
-import 'package:video_editot/store/middleware/test_middleware.dart';
+import 'package:video_editot/store/middleware/middleware.dart';
 import 'package:video_editot/store/reducers/app_reducer.dart';
 import 'package:video_editot/store/states/app_state.dart';
 import 'package:video_editot/ui/screens/camera_screen.dart';
@@ -19,20 +19,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 void main() => runApp(App());
 
-test() async {
-
-
-  var movies= await FileRepository().getMovies();
-
-  movies.forEach((m){
-
-    m.path;
-
-  });
-
-
-
-}
 
 class App extends StatelessWidget {
   final store = Store<AppState>(appReducer,
@@ -41,7 +27,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    test();
+
 
     return StoreProvider(
       store: store,

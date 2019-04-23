@@ -12,6 +12,7 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen> {
   CameraController controller;
+  String _moviePath;
 
   @override
   void initState() {
@@ -91,37 +92,43 @@ class _CameraScreenState extends State<CameraScreen> {
 
     controller = CameraController(cameras[1], ResolutionPreset.high);
 
-    controller.addListener(() {
-      if (mounted) setState(() {});
+    controller.initialize().then((_) {
+      setState(() {});
     });
-
-    controller.initialize();
   }
 
   void startRecord() async {
-    if (!controller.value.isInitialized || controller.value.isRecordingVideo) {
-      return null;
+    if (controller == null ||
+        !controller.value.isInitialized ||
+        controller.value.isRecordingVideo) {
+      return;
     }
 
-    var fileRepo = FileRepository();
+    var fileRepo = FileService();
 
     var moviesDir = await fileRepo.getMoviesDir();
 
-    final String filePath =
+    _moviePath =
         '${moviesDir.path}/${DateTime.now().microsecondsSinceEpoch.toString()}.mp4';
 
-    controller.startVideoRecording(filePath).then((_) {
-      if (mounted) setState(() {});
-    });
+    controller.startVideoRecording(_moviePath);
+
+    setState(() {});
   }
 
   void stopRecord() async {
     if (controller.value.isRecordingVideo) {
-      controller.stopVideoRecording().then((_) {
-        if (mounted) setState(() {});
+      await controller.stopVideoRecording();
 
-        Navigator.pop(context);
-      });
+      var fileService = FileService();
+
+      await fileService.createMovieThumbnail(_moviePath);
+
+      await fileService.getMovieThumbnails();
+
+      if (mounted) setState(() {});
+
+      Navigator.pop(context);
     }
   }
 }
