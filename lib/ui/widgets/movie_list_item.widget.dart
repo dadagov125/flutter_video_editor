@@ -23,29 +23,35 @@ class MovieListItem extends StatelessWidget {
 
     var createdText = DateFormat('yyyy/MM/dd  kk:mm').format(createdDate);
 
-    return AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: Container(
-        margin: EdgeInsets.all(5),
-        height: image.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: FileImage(File(movieThumbnail.path)), fit: BoxFit.fill),
-        ),
-        child: Align(
-          alignment: Alignment.bottomLeft,
-          child: Container(
-            padding: EdgeInsets.only(left: 5, bottom: 5),
-            child: Text(
-              createdText,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+    return GestureDetector(
+      child: AspectRatio(
+        aspectRatio: _controller.value.aspectRatio,
+        child: Container(
+          margin: EdgeInsets.all(5),
+          height: image.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: FileImage(File(movieThumbnail.path)), fit: BoxFit.fill),
+          ),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              padding: EdgeInsets.only(left: 5, bottom: 5),
+              child: Text(
+                createdText,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
         ),
       ),
+
+      onTap: (){
+        Navigator.pushNamed(context, "movie_edit");
+      },
     );
   }
 }

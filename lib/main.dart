@@ -7,6 +7,7 @@ import 'package:video_editot/store/reducers/app_reducer.dart';
 import 'package:video_editot/store/states/app_state.dart';
 import 'package:video_editot/ui/screens/camera_screen.dart';
 import 'package:video_editot/ui/screens/home_screen.dart';
+import 'package:video_editot/ui/screens/movie_edit_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
@@ -35,7 +36,8 @@ class App extends StatelessWidget {
         title: 'Test App',
         routes: {
           "home": (context) => HomeScreen(),
-          "camera": (context) => CameraScreen()
+          "camera": (context) => CameraScreen(),
+          "movie_edit":(context)=>MovieEditScreen()
         },
         initialRoute: "home",
 
