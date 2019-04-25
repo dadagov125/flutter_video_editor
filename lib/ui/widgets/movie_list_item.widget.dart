@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:video_editot/ui/screens/movie_edit_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:path/path.dart' as p;
 
@@ -36,21 +37,20 @@ class MovieListItem extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              padding: EdgeInsets.only(left: 5, bottom: 5),
-              child: Text(
-                createdText,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ),
+                padding: EdgeInsets.only(left: 5, bottom: 5),
+                child: Text(
+                  createdText,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                )),
           ),
         ),
       ),
+      onTap: () {
 
-      onTap: (){
-        Navigator.pushNamed(context, "movie_edit");
+        Navigator.of(context).pushNamed(MovieEditScreen.routeName,arguments: movieThumbnail.path);
       },
     );
   }

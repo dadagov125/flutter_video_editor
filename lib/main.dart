@@ -15,11 +15,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-
-
-
 void main() => runApp(App());
-
 
 class App extends StatelessWidget {
   final store = Store<AppState>(appReducer,
@@ -28,41 +24,23 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return StoreProvider(
       store: store,
       child: MaterialApp(
-        title: 'Test App',
-        routes: {
-          "home": (context) => HomeScreen(),
-          "camera": (context) => CameraScreen(),
-          "movie_edit":(context)=>MovieEditScreen()
-        },
-        initialRoute: "home",
-
-//        home: Scaffold(
-//          body: StoreConnector<AppState, String>(
-//            converter: (store)=>store.state.test.text,
-//
-//            builder: (context, vm)=>Text(vm),
-//          ),
-//
-//          floatingActionButton: StoreConnector<AppState, VoidCallback >(
-//            converter: (store)=>()=> store.dispatch(Pre_LoadMoviesAction()),
-//
-//            builder: (context, callback)=>FloatingActionButton(
-//              onPressed: callback,
-//                tooltip: 'Increment',
-//                child: new Icon(Icons.add)
-//            ),
-//
-//          )
-//
-//
-//
-//        )
-      ),
+          title: 'Test App',
+          routes: {
+            HomeScreen.routeName: (context) => HomeScreen(),
+            CameraScreen.routeName: (context) => CameraScreen(),
+            //"movie_edit": (context) => MovieEditScreen()
+          },
+          initialRoute: HomeScreen.routeName,
+          onGenerateRoute: (settings) {
+            if (settings.name == MovieEditScreen.routeName) {
+              return MaterialPageRoute(
+                  builder: (context) =>
+                      MovieEditScreen(settings.arguments.toString()));
+            }
+          }),
     );
   }
 }

@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:video_editot/repositories/file_repository.dart';
 
 class CameraScreen extends StatefulWidget {
+
+  static final String routeName="camera";
+
   @override
   createState() => _CameraScreenState();
 }
@@ -125,7 +128,7 @@ class _CameraScreenState extends State<CameraScreen> {
       await fileService.createMovieThumbnail(_moviePath);
 
 
-      if (mounted) setState(() {});
+      //if (mounted) setState(() {});
 
       Navigator.pop(context);
     }
